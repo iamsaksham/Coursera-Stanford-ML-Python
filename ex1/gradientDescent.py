@@ -1,4 +1,5 @@
 from computeCost import computeCost
+import numpy as np
 
 
 def gradientDescent(X, y, theta, alpha, num_iters):
@@ -21,6 +22,9 @@ def gradientDescent(X, y, theta, alpha, num_iters):
         #       of the cost function (computeCost) and gradient here.
         #
 
+        hx = np.dot(X, theta)
+        part = np.dot(hx - y, X)
+        theta = theta - (alpha * (part / m))
 
         # ============================================================
 

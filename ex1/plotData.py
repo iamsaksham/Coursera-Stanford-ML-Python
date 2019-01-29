@@ -16,5 +16,8 @@ def plotData(x, y):
 #               as the x and y arguments of this function.
 
     plt.figure()  # open a new figure window
+    plt.plot(x, y, 'rx')
+    plt.xlabel('Population of City in 10,000s')
+    plt.ylabel('Profit in $10,000s')
 
 # ============================================================
