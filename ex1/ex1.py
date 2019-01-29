@@ -1,3 +1,6 @@
+import sys
+sys.path.append("..")
+
 from matplotlib import use, cm
 use('TkAgg')
 import matplotlib.pyplot as plt
