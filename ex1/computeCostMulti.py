@@ -12,7 +12,10 @@ def computeCostMulti(X, y, theta):
 # ====================== YOUR CODE HERE ======================
 # Instructions: Compute the cost of a particular choice of theta
 #               You should set J to the cost.
-
+    hx = np.dot(X, theta)
+    squaredError = np.square(hx - y)
+    sumSquaredError = np.sum(squaredError)
+    J = sumSquaredError / (2 * m)
 
 # =========================================================================
 

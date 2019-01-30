@@ -1,3 +1,6 @@
+import sys
+sys.path.append("..")
+
 from matplotlib import use
 use('TkAgg')
 import numpy as np
