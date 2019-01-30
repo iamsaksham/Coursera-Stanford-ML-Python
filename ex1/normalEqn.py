@@ -13,7 +13,11 @@ def normalEqn(X, y):
 #
 
 # ---------------------- Sample Solution ----------------------
-
+    XT = X.transpose()
+    XTX = np.dot(XT, X)
+    XTXI = np.linalg.inv(XTX)
+    XTXIXT = np.dot(XTXI, XT)
+    theta = np.dot(XTXIXT, y)
 
 # -------------------------------------------------------------
 
