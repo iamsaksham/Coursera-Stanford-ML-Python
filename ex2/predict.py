@@ -13,6 +13,11 @@ def predict(theta, X):
     #               your learned logistic regression parameters.
     #               You should set p to a vector of 0's and 1's
     #
+    z = np.dot(X, theta)
+    p = sigmoid(z)
+    p[p >= 0.5] = 1
+    p[p < 0.5] = 0
+
     # =========================================================================
 
     return p
