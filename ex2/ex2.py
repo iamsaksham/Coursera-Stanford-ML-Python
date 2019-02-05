@@ -1,4 +1,7 @@
 # Logistic Regression
+import sys
+sys.path.append("..")
+
 from matplotlib import use
 
 use('TkAgg')
