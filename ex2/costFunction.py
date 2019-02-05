@@ -17,6 +17,12 @@ def costFunction(theta, X, y):
     #               derivatives of the cost w.r.t. each parameter in theta
     #
     # Note: grad should have the same dimensions as theta
+
+    z = np.dot(X, theta)
+    sigm = sigmoid(z)
+    logHx = np.log(sigm)
+    logHx1 = np.log(1 + (-1 * sigm))
+    J = (np.dot((-1 * y), logHx) - np.dot((1 + (-1 * y)), logHx1)) / m
     # =============================================================
 
     return J
