@@ -1,3 +1,6 @@
+import sys
+sys.path.append("..")
+
 import scipy.io
 import numpy as np
 from matplotlib import use
