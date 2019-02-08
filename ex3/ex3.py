@@ -1,12 +1,11 @@
 import sys
 sys.path.append("..")
+sys.path.append('../ex2/')
 
 import scipy.io
 import numpy as np
 from matplotlib import use
 use('TkAgg')
-import sys
-sys.path.append('../ex2/')
 
 from oneVsAll import oneVsAll
 from predictOneVsAll import predictOneVsAll
