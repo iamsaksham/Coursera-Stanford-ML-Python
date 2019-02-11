@@ -29,9 +29,10 @@ def lrCostFunction(theta, X, y, Lambda):
     hx = 1 / (1 + np.exp(-1 * z))
     logHx = np.log(hx)
     logHx1 = np.log(1 + (-1 * hx))
+    y = np.transpose(y)
     JNormal = (np.dot((-1 * y), logHx) - np.dot((1 + (-1 * y)), logHx1)) / m
 
-    thetaSquare = np.dot(theta, theta) - (theta[0] * theta[0]) # regularisation does not include theta[0] as this was a constant that was already chosen by us.
+    thetaSquare = np.dot(np.transpose(theta), theta) - (theta[0] * theta[0]) # regularisation does not include theta[0] as this was a constant that was already chosen by us.
     J = JNormal + ((Lambda * thetaSquare) / (2 * m))
 
     #  =============================================================

@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.optimize import minimize
+# np.set_printoptions(threshold=np.inf)
 
 from lrCostFunction import lrCostFunction
 from ex2.gradientFunctionReg import gradientFunctionReg
@@ -36,6 +37,34 @@ def oneVsAll(X, y, num_labels, Lambda):
 
     # Set Initial theta
     initial_theta = np.zeros((n + 1, 1))
+
+    for c in np.arange(1, num_labels+1):
+        res = minimize(lrCostFunction, initial_theta, args=(X, (y == c), Lambda), method=None, options={'maxiter':50})
+        all_theta[c-1] = res.x
+
+    # for c in range(0, num_labels):
+    #     initial_theta = np.zeros((n + 1, 1))
+    #     # print('c--> ', c)
+    #     result = minimize(lrCostFunction, initial_theta, (X, (y == c), Lambda), method=None, options={ 'maxiter': 50 })
+    #     # print('1--> ', result)
+    #     all_theta[c][:] = result.x
+    #     all_theta[c][0] = 0.0
+    #     # print('2--> ', all_theta[c])
+
+    # print('final--> ', all_theta)
+
+    # alpha = 0.3
+    # z = np.dot(X, initial_theta)
+    # hx = 1 / (1 + np.exp(-1 * z))
+
+    # cost = (np.dot(np.transpose(X), (hx - y))) / m
+    # grad = cost + ((Lambda * initial_theta) / m)
+
+    # for i in range(0, num_labels):
+    #     a1 = initial_theta - (alpha * grad)
+    #     a1 = np.transpose(a1)
+    #     all_theta[i] = a1[0][:]
+    #     all_theta[i][0] = initial_theta[0][0]
 
     # This function will return theta and the cost
     # =========================================================================
