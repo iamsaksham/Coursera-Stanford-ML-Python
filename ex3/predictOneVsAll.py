@@ -32,6 +32,11 @@ def predictOneVsAll(all_theta, X):
     #       are in rows, then, you can use max(A, [], 2) to obtain the max
     #       for each row.
     #
+    all_thetaT = np.transpose(all_theta)
+    pr = np.dot(X, all_thetaT)
+    p = np.argmax(pr, axis=1)
+    p = np.transpose(p)
+
     # =========================================================================
 
     return p + 1    # add 1 to offset index of maximum in A row
