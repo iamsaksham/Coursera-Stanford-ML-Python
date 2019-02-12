@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sys
 sys.path.append('../ex2/')
+sys.path.append('..')
 
 from displayData import displayData
 from predict import predict

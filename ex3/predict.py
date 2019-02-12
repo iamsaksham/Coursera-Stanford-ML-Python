@@ -22,6 +22,22 @@ def predict(Theta1, Theta2, X):
     #       information see 'help max'. If your examples are in rows, then, you
     #       can use max(A, [], 2) to obtain the max for each row.
     #
+
+    X = np.column_stack((np.ones((m, 1)), X))
+    XT = np.transpose(X)
+    z2 = np.dot(Theta1, XT)
+    a2 = sigmoid(z2)
+
+    a2 = np.transpose(a2)
+    a2 = np.column_stack((np.ones((a2.shape[0], 1)), a2))
+    a2 = np.transpose(a2)
+
+    z3 = np.dot(Theta2, a2)
+    a3 = sigmoid(z3)
+    a3 = np.transpose(a3)
+
+    p = np.argmax(a3, axis=1)
+
     # =========================================================================
 
     return p + 1  # add 1 to offset index of maximum in A row
