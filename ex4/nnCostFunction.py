@@ -58,9 +58,43 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size,
     #               the regularization separately and then add them to Theta1_grad
     #               and Theta2_grad from Part 2.
     #
+
+    X = np.column_stack((np.ones((m, 1)), X))
+    Theta1T = np.transpose(Theta1)
+    Theta2T = np.transpose(Theta2)
+    JAll = np.zeros((num_labels, 1))
+
+    z2 = np.dot(X, Theta1T)
+    a2 = sigmoid(z2)
+    a2 = np.column_stack((np.ones((a2.shape[0], 1)), a2))
+
+    z3 = np.dot(a2, Theta2T)
+    hx = sigmoid(z3)
+    hx2 = 1 - hx
+    logHX = np.log(hx)
+    logHX2 = np.log(hx2)
+
+    for c in np.arange(1, num_labels+1):
+        yNew = (y==c)*1    # (y==c) gives an array with true/false values, by doing (y==c)*1 it converts to array with values 0/1
+        yNew = np.transpose(yNew)
+        Cost = np.dot(yNew, logHX) + np.dot((1 - yNew), logHX2)
+        JAll[c-1] = (-1 * Cost[c-1]) / m
+
+    J = JAll.sum()
+
+
+    # regularization
+    sum1 = np.square(Theta1[:,1:])
+    sum1 = sum1.sum()
+    sum2 = np.square(Theta2[:,1:])
+    sum2 = sum2.sum()
+    regular = (Lambda / (2 * m)) * (sum1 + sum2)
+    J = J + regular
+
     # =========================================================================
 
     # Unroll gradient
-    grad = np.hstack((Theta1_grad.T.ravel(), Theta2_grad.T.ravel()))
+    grad = np.hstack((Theta1.T.ravel(), Theta2.T.ravel()))
+    # grad = np.hstack((Theta1_grad.T.ravel(), Theta2_grad.T.ravel()))
 
     return J, grad

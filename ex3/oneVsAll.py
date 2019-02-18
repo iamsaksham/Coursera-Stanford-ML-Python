@@ -39,7 +39,7 @@ def oneVsAll(X, y, num_labels, Lambda):
     initial_theta = np.zeros((n + 1, 1))
 
     for c in np.arange(1, num_labels+1):
-        res = minimize(lrCostFunction, initial_theta, args=(X, (y == c), Lambda), method=None, options={'maxiter':50})
+        res = minimize(lrCostFunction, initial_theta, args=(X, (y == c)*1, Lambda), method=None, options={'maxiter':50}) # (y==c) gives an array with true/false values, by doing (y==c)*1 it converts to array with values 0/1
         all_theta[c-1] = res.x
 
     # for c in range(0, num_labels):

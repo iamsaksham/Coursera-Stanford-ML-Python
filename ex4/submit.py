@@ -1,3 +1,6 @@
+import sys
+sys.path.append('..')
+
 import numpy as np
 
 from Submission import Submission
@@ -36,10 +39,10 @@ def output(part_id):
     func = getattr(mod, fname)
 
     if part_id == 1:
-        J, grad = func(t, 2.0, 4.0, 4.0, Xm, ym, 0.0)
+        J, grad = func(t, 2, 4, 4, Xm, ym, 0)
         return sprintf('%0.5f ', J)
     elif part_id == 2:
-        J, grad = func(t, 2.0, 4.0, 4.0, Xm, ym, 1.5)
+        J, grad = func(t, 2, 4, 4, Xm, ym, 1.5)
         return sprintf('%0.5f ', J)
     elif part_id == 3:
         return sprintf('%0.5f ', func(X))

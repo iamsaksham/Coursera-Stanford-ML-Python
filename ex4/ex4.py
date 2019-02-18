@@ -1,3 +1,7 @@
+import sys
+sys.path.append("..")
+sys.path.append('../ex3/')
+
 import numpy as np
 import scipy.io
 from scipy.optimize import minimize
