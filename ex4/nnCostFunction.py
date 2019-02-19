@@ -61,15 +61,15 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size,
 
     X = np.column_stack((np.ones((m, 1)), X))
     Theta1T = np.transpose(Theta1)
-    Theta2T = np.transpose(Theta2)
+    Theta2T = np.transpose(Theta2)  # 26x10
     JAll = np.zeros((num_labels, 1))
 
-    z2 = np.dot(X, Theta1T)
+    z2 = np.dot(X, Theta1T) # 5000x25
     a2 = sigmoid(z2)
-    a2 = np.column_stack((np.ones((a2.shape[0], 1)), a2))
+    a2 = np.column_stack((np.ones((a2.shape[0], 1)), a2))   # 5000x26
 
     z3 = np.dot(a2, Theta2T)
-    hx = sigmoid(z3)
+    hx = sigmoid(z3)    # 5000x10
     hx2 = 1 - hx
     logHX = np.log(hx)
     logHX2 = np.log(hx2)
@@ -91,10 +91,29 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size,
     regular = (Lambda / (2 * m)) * (sum1 + sum2)
     J = J + regular
 
+    # backpropagation
+    d3 = np.ones((m, num_labels))   # 5000x10
+    d2 = np.ones((m, z2.shape[1]))   # 5000x25
+    D2 = np.zeros((num_labels, a2.shape[1])) # 10x26
+    D1 = np.zeros((z2.shape[1], X.shape[1])) # 25x401
+    sigZ2 = sigmoidGradient(z2) # 5000x25
+    for c in np.arange(0, m):
+        yTemp = np.zeros((num_labels, ))
+        yTemp[y[c]-1] = 1 # vector with values for the output layer for ith example
+        d3[c, ] = hx[c] - yTemp
+        dotProd = np.dot(Theta2T, d3[c, ])
+        dotProd = np.delete(dotProd, (0))   # remove the bias row
+        d2[c, ] = (dotProd * sigZ2[c, ])
+
+    D2 = D2 + (np.dot(np.transpose(d3), a2))
+    D1 = D1 + (np.dot(np.transpose(d2), X))
+
+    Theta1_grad = D1 / m
+    Theta2_grad = D2 / m
+
     # =========================================================================
 
     # Unroll gradient
-    grad = np.hstack((Theta1.T.ravel(), Theta2.T.ravel()))
-    # grad = np.hstack((Theta1_grad.T.ravel(), Theta2_grad.T.ravel()))
+    grad = np.hstack((Theta1_grad.T.ravel(), Theta2_grad.T.ravel()))
 
     return J, grad
