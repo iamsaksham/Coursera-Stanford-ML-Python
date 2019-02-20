@@ -60,7 +60,7 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size,
     #
 
     X = np.column_stack((np.ones((m, 1)), X))
-    Theta1T = np.transpose(Theta1)
+    Theta1T = np.transpose(Theta1)  # 401x25
     Theta2T = np.transpose(Theta2)  # 26x10
     JAll = np.zeros((num_labels, 1))
 
@@ -105,11 +105,18 @@ def nnCostFunction(nn_params, input_layer_size, hidden_layer_size,
         dotProd = np.delete(dotProd, (0))   # remove the bias row
         d2[c, ] = (dotProd * sigZ2[c, ])
 
-    D2 = D2 + (np.dot(np.transpose(d3), a2))
-    D1 = D1 + (np.dot(np.transpose(d2), X))
+    D2 = D2 + (np.dot(np.transpose(d3), a2))    # Δ2    25x401
+    D1 = D1 + (np.dot(np.transpose(d2), X))     # Δ1    10x26
 
-    Theta1_grad = D1 / m
-    Theta2_grad = D2 / m
+    D1 = D1 / m
+    D2 = D2 / m
+
+    # regularise Δ
+    D2[:, 1:] = D2[:, 1:] + ((Lambda / m) * Theta2[:, 1:])
+    D1[:, 1:] = D1[:, 1:] + ((Lambda / m) * Theta1[:, 1:])
+
+    Theta1_grad = D1
+    Theta2_grad = D2
 
     # =========================================================================
 
