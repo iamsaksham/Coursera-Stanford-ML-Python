@@ -1,3 +1,5 @@
+import sys
+sys.path.append('..')
 from show import show
 import scipy.io
 import matplotlib.pyplot as plt
