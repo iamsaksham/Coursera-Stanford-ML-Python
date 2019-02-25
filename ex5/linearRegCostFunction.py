@@ -18,8 +18,8 @@ def linearRegCostFunction(X, y, theta, Lambda):
     #               You should set J to the cost and grad to the gradient.
     #
 
-    hx = np.dot(X, theta)
-    squaredError = np.square(hx - y)
+    hx = np.dot(X, theta) #12x1
+    squaredError = np.square(hx - y)  # 12x1
     sumSquaredError = np.sum(squaredError)
     J = sumSquaredError / (2 * m)
 
@@ -28,6 +28,10 @@ def linearRegCostFunction(X, y, theta, Lambda):
     reg = (Lambda / (2 * m)) * thetaSq.sum()
 
     J = J + reg
+
+    # gradient
+    grad = (np.dot(np.transpose(X), (hx - y))) / m
+    grad[1:] = ((Lambda / m) * theta[1:]) + grad[1:]
 
     # =========================================================================
 
