@@ -55,6 +55,15 @@ def learningCurve(X, y, Xval, yval, Lambda):
 
     # ---------------------- Sample Solution ----------------------
 
+    for i in np.arange(m):
+      theta = trainLinearReg(X[:i+1], y[:i+1], Lambda)
+      error_train[i], _ = linearRegCostFunction(X[:i+1], y[:i+1], theta, 0)
+      error_val[i], _ = linearRegCostFunction(Xval, yval, theta, 0)
+
+    # for i in np.arange(m):
+    #   theta = trainLinearReg(X[:i], y[:i], Lambda)  # for training the model, we use Lamba
+    #   error_train[i], _ = linearRegCostFunction(X[:i], y[:i], theta, 0) # for J(theta)train, Lambda = 0
+    #   error_val[i], _ = linearRegCostFunction(Xval[:i], yval[:i], theta, 0) # for J(theta)CV, Lambda = 0
 
 
     # -------------------------------------------------------------------------
