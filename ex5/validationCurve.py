@@ -39,6 +39,12 @@ def validationCurve(X, y, Xval, yval):
     #
     #       end
     #
+
+    for i in np.arange(lambda_vec.shape[0]):
+      theta = trainLinearReg(X, y, lambda_vec[i])
+      error_train[i], _ = linearRegCostFunction(X, y, theta, 0)
+      error_val[i], _ = linearRegCostFunction(Xval, yval, theta, 0)
+
     # =========================================================================
 
     return lambda_vec, error_train, error_val
