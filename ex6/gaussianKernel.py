@@ -18,5 +18,11 @@ def gaussianKernel(x1, x2, sigma):
     #               and x2 computed using a Gaussian kernel with bandwidth
     #               sigma
     #
+
+    diff = np.square(x1 - x2)
+    sum1 = np.sum(diff)
+    f1 = sum1 / (2 * sigma * sigma)
+    sim = np.exp(-1 * f1)
+
     # =============================================================
     return sim

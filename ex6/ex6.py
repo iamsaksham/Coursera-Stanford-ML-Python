@@ -15,6 +15,9 @@
 #  For this exercise, you will not need to change any code in this file,
 #  or any other files other than those mentioned above.
 
+import sys
+sys.path.append('..')
+
 from matplotlib import use, cm
 use('TkAgg')
 import numpy as np
