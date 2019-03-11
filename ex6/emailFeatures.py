@@ -49,6 +49,10 @@ def emailFeatures(word_indices):
     #              x = [ 0 0 0 0 1 0 0 0 ... 0 0 0 0 1 ... 0 0 0 1 0 ..]
     #
     #
+
+    for word in word_indices:
+      x[word] = 1
+
     # =========================================================================
 
     return x
